@@ -15,7 +15,7 @@ library(ggpubr)
 xticks <- c(11, 14, 17, 2, 5, 8)
 
 # vector to label x-axis
-sites <- c("KI", "CH", "VC","KA", "UB", "VR")
+sites <- c("Kimisi", "Christos", "VrouliaCS","Katsadia", "Urban Bay", "Vroulia")
 nosites <- c("", "", "", "", "", "")
 
 # 2. Data visualization of biometric and health parameters ---------------------
@@ -34,7 +34,7 @@ load <- ggplot(data, aes(x=factor(Block), y= Epiphyte.Load,
         strip.background = element_rect(color="black", fill="white"),        
         plot.title = element_text(hjust=0.5),                                
         text=element_text(family="Helvetica", face="bold", size=12))+                                   
-  scale_color_manual(values = c("CS" = "#59a89c", "PDS" = "#cf3759"))+      
+  scale_color_manual(values = c("CS" = "#457983", "PDS" = "#cf3759"))+      
   labs(y=expression(bold(paste("gg"^"-1", "DW"))))+
   xlab(NULL)+
   ggtitle("Epiphyte load")+
@@ -165,13 +165,14 @@ total
 final_plot_health <- ggarrange(lai, width, length, shoots, load, total,
                                widths = c(2,2), nrow = 3, 
                                ncol = 2, align="v")
-annotate_figure(final_plot_health, 
+
+final_plot_health <-   annotate_figure(final_plot_health, 
                   bottom = text_grob("Sites", face = "bold", size = 14))
 
 final_plot_health
 
 ggsave(filename = "Plots/Health_parameters.jpg", plot = final_plot_health,
-       width = 14, height = 11, units = "cm")
+       width = 25, height = 19.5, units = "cm")
 
 # 3. Data visualization of epiphyte functional groups --------------------------
 
@@ -482,9 +483,9 @@ final_NMDS <- ggplot(site.scrs, aes(x=NMDS1, y=NMDS2)) +
                    y = ticks, yend = ticks)) + 
   geom_point(size = 3, color = "white",
              aes(NMDS1, NMDS2, shape = factor(Sites), fill = Condition))+
-  scale_color_manual(values=c("#59a89c", "#cf3759"))+ 
+  scale_color_manual(values=c("#457983", "#cf3759"))+ 
   scale_shape_manual(values=c(21, 21, 24, 22, 22, 24))+ 
-  scale_fill_manual(values=c("#59a89c", "#cf3759"))+
+  scale_fill_manual(values=c("#457983", "#cf3759"))+
   theme_void() +
   geom_segment(data = sig.env.scrs, aes(x = 0, xend=NMDS1, y=0, yend=NMDS2), 
                arrow = arrow(length = unit(0.1, "cm")), 
